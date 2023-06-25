@@ -4,13 +4,13 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "finops_crawler"
-version = "0.1.4"
+version = "0.1.5"
 description = "It's a package for importing cost and usage data from various cloud platforms and SaaS tools"
 authors = ["Lauri Koobas <laurikoobas@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.10"
 requests = "^2.31.0"
 azure-identity = "^1.13.0"
 azure-mgmt-costmanagement = "^4.0.0"
@@ -19,7 +19,7 @@ azure-core = "1.27.0"
 boto3 = "^1.26.156"
 
 [tool.poetry.dev-dependencies]
-# development dependencies go here
+python-dotenv = "^1.0.0"
 
 [tool.poetry.urls]
 "Home" = "https://github.com/finops-fitness-club/finops_crawler"
