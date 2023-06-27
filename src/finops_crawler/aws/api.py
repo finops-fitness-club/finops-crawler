@@ -1,10 +1,11 @@
 import datetime
 import boto3
+from typing import Optional, Union
 from botocore.exceptions import BotoCoreError
 from finops_crawler.base import CloudAPI
 
 class AWSAPI(CloudAPI):
-    def __init__(self, aws_access_key_id:str=None, aws_secret_access_key:str=None):
+    def __init__(self, aws_access_key_id: Optional[str] = None, aws_secret_access_key: Optional[str] = None):
         """
         Initialize AWSAPI.
 
@@ -75,7 +76,7 @@ class AWSAPI(CloudAPI):
 
         return accounts
 
-    def get_cost(self, start_date: datetime.datetime, end_date: datetime.datetime):
+    def get_cost(self, start_date: Union[str, datetime.datetime], end_date: Union[str, datetime.datetime]):
         """
         Retrieves the cost of AWS services used over a specified time period.
 
@@ -103,10 +104,16 @@ class AWSAPI(CloudAPI):
             More information about the AWS Cost Explorer GetCostAndUsage operation can be found in the 
             AWS documentation: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ce.html#CostExplorer.Client.get_cost_and_usage
         """
-        client = self.session.client('ce')
+        if isinstance(start_date, str):
+            start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+        if isinstance(end_date, str):
+            end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
+
         start_date_str = start_date.strftime('%Y-%m-%d')
         end_date_str = end_date.strftime('%Y-%m-%d')
         results_by_time = []
+
+        client = self.session.client('ce')
 
         response = client.get_cost_and_usage(
             TimePeriod={

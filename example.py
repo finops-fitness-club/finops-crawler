@@ -45,4 +45,4 @@ def test_openai():
     print(cost_data)
 
 if __name__ == "__main__":
-    test_openai()
+    test_aws()

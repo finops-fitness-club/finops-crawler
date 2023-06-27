@@ -1,12 +1,11 @@
-import requests
 import datetime
 import time
+from typing import Union
+
 from azure.identity import ClientSecretCredential
 from azure.mgmt.costmanagement import CostManagementClient
 from azure.mgmt.costmanagement.models import QueryDefinition, QueryDataset
-
 from azure.mgmt.resource import SubscriptionClient
-
 from azure.core.exceptions import ResourceNotFoundError
 from azure.core.exceptions import HttpResponseError
 
@@ -25,14 +24,20 @@ class AzureAPI(CloudAPI):
         subscriptions = list(subscription_iterator)
         return [subscription.subscription_id for subscription in subscriptions]
 
-    def get_cost(self, subscription_id: str, start_date: datetime.datetime, end_date: datetime.datetime):
-        # setup cost management client with the subscription id
-        cost_management_client = CostManagementClient(self.credential)
-        scope = f'/subscriptions/{subscription_id}/'
-        # Convert the datetime objects to strings in the required format
+    def get_cost(self, subscription_id: str, start_date: Union[str, datetime.datetime], end_date: Union[str, datetime.datetime]):
+        if isinstance(start_date, str):
+            start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+        if isinstance(end_date, str):
+            end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
+
         start_date_str = start_date.strftime('%Y-%m-%d')
         end_date_str = end_date.strftime('%Y-%m-%d')
         print(f"Looking for data between {start_date_str} and {end_date_str}")
+
+        # setup cost management client with the subscription id
+        cost_management_client = CostManagementClient(self.credential)
+        scope = f'/subscriptions/{subscription_id}/'
+
         while True:
             query = QueryDefinition(
                 type='ActualCost',
