@@ -1,16 +1,25 @@
 # finops-crawler
 
-This project is active. Development is ongoing, contributions are welcome (see below).
+This project is active. Development is ongoing, and contributions are welcome (see below).
 
 ## Basic Usage
 
-This package is designed to fetch cost/usage data from various platforms (Azure, AWS, OpenAI, more to follow).
+This package is designed to fetch cost/usage data from various platforms (Azure, AWS, OpenAI, and more to follow).
 
 The result is a Python list of dicts as returned by the API or SDK.
 
-To use it, follow the steps below:
+To use it, follow the steps below.
 
-### Setting up the Environment
+### Platform-specific documentation
+
+Showing how to set up an entity with minimum permissions to read the cost data for each platform (if applicable). As well as specific code snippets to get started.
+
+- [Azure](./src/finops_crawler/azure)
+- [AWS](./src/finops_crawler/aws)
+- [OpenAI](./src/finops_crawler/openai)
+
+
+### Setting up the Environment, an example
 
 Before you start, you'll need to set up your environment variables with the necessary credentials for the platforms that you wish to use. For example, to query OpenAI usage then you only need to have the OPENAI_ORG_ID and OPENAI_API_KEY described.
 
@@ -52,7 +61,7 @@ More thorough documentation will follow soon, but for now:
 
 ### Getting the cost data
 
-Getting the data depends on the platform. For example, in Azure you will immediately see all subscriptions that you have access to. In AWS, on the other hand, you either are part of an organization or have a standalone account, etc. OpenAI also has organizations system, which is currently ignored by the crawler.
+Getting the data depends on the platform. For example, in Azure, you will immediately see all subscriptions that you have access to. In AWS, on the other hand, you either are part of an organization or have a standalone account, etc. OpenAI also has an organizations system, which is currently ignored by the crawler.
 
 There are examples in [example.py](example.py) file.
 
