@@ -1,4 +1,4 @@
-# finops-crawler for AWS
+# finops-crawler for Azure
 
 [Main documentation](/README.md) about the idea, structure and contribution. It's a package for getting Azure cost data into Python. The group-by dimensions are ResourceId and ChargeType to provide maximum meaningful granularity.
 
@@ -22,7 +22,7 @@ Then use `APP_ID_THAT_WAS_JUST_CREATED` like this:
 az role assignment create --assignee APP_ID_THAT_WAS_JUST_CREATED --role "Cost Management Reader" --scope /subscriptions/YOUR_SUBSCRIPTION_ID
 ```
 Then set environment variables (yes, "app" and "client" are the same thing here):
-```
+```env
 AZURE_TENANT_ID=YOUR_TENANT_ID
 AZURE_CLIENT_ID=APP_ID_THAT_WAS_JUST_CREATED
 AZURE_CLIENT_SECRET=YOUR_APP_PASSWORD
@@ -59,7 +59,7 @@ The second step is to assign it some permissions so that it can read the cost da
 One should never write credentials directly into code. Thus, there is a way to read it from the environment variables at runtime. This is also how this script expects the credentials.
 
 This is what should exist in your environment variables before running the script. Note that the values come from the output of the first step.
-```
+```env
 AZURE_TENANT_ID=YOUR_TENANT_ID
 AZURE_CLIENT_ID=APP_ID_THAT_WAS_JUST_CREATED
 AZURE_CLIENT_SECRET=YOUR_APP_PASSWORD
