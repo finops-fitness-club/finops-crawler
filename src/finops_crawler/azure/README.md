@@ -4,11 +4,14 @@
 
 ## Setting up the service principal and permissions
 
-TL;DR using [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). It creates a service principal and assigns the "Cost Management Reader" role to it in your subscription.
+### Quickstart
+
+Using [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). It creates a service principal and assigns the "Cost Management Reader" role to it in your subscription.
+
 ```bash
 az ad sp create-for-rbac --name "Finops Crawler"
 ```
-outputs
+outputs:
 ```json
 {
   "appId": "APP_ID_THAT_WAS_JUST_CREATED",
