@@ -34,7 +34,7 @@ outputs:
 ```json
 {
     "AccessKey": {
-        "UserName": "finops_crawler2",
+        "UserName": "finops_crawler",
         "AccessKeyId": "YOUR_ACCESS_KEY_ID",
         "Status": "Active",
         "SecretAccessKey": "YOUR_SECRET_ACCESS_KEY",
@@ -114,7 +114,7 @@ outputs:
 ```json
 {
     "AccessKey": {
-        "UserName": "finops_crawler2",
+        "UserName": "finops_crawler",
         "AccessKeyId": "YOUR_ACCESS_KEY_ID",
         "Status": "Active",
         "SecretAccessKey": "YOUR_SECRET_ACCESS_KEY",

@@ -1,6 +1,6 @@
 # finops-crawler for Azure
 
-[Main documentation](/README.md) about the idea, structure and contribution. It's a package for getting Azure cost data into Python. The group-by dimensions are ResourceId and ChargeType to provide maximum meaningful granularity.
+[Main documentation](/) about the idea, structure and contribution. It's a package for getting Azure cost data into Python. The group-by dimensions are ResourceId and ChargeType to provide maximum meaningful granularity.
 
 ## Setting up the service principal and permissions
 
