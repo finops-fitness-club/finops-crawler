@@ -6,64 +6,31 @@ This project is active. Development is ongoing, and contributions are welcome (s
 
 This package is designed to fetch cost/usage data from various platforms (Azure, AWS, OpenAI, and more to follow).
 
-The result is a Python list of dicts as returned by the API or SDK.
+**The main principle is to have as simple an approach as possible along with the absolute minimum set of permissions required**. Thus, the quickstart part of each guide is presented as CLI commands.
 
-To use it, follow the steps below.
+The result, for now, is a Python variable as returned by the API or SDK.
 
 ### Platform-specific documentation
 
-Showing how to set up an entity with minimum permissions to read the cost data for each platform (if applicable). As well as specific code snippets to get started.
+Each platform is different and has a separate guide on how to set up an entity with minimum permissions to read the cost data. Specific code snippets to get started are included.
 
 - [Azure](./src/finops_crawler/azure)
 - [AWS](./src/finops_crawler/aws)
 - [OpenAI](./src/finops_crawler/openai)
 
 
-### Setting up the Environment, an example
+### Overview of the flow
 
-Before you start, you'll need to set up your environment variables with the necessary credentials for the platforms that you wish to use. For example, to query OpenAI usage then you only need to have the OPENAI_ORG_ID and OPENAI_API_KEY described.
+1. Set up a user (technical user/service principal) for querying the data
+2. Set up permissions for that user
+3. Set environment variables to be used by the package
+4. Use the package
 
-For Azure:
+### Resulting data
 
-- `AZURE_TENANT_ID`
-- `AZURE_CLIENT_ID`
-- `AZURE_CLIENT_SECRET`
+Each platform has its own format. Also, the same date range might produce different results depending on the platform. Some might include the last day, some may not.
 
-For AWS:
-
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-
-For OpenAI:
-
-- `OPENAI_ORG_ID`
-- `OPENAI_API_KEY`
-
-We recommend using the dotenv module to manage your environment variables. Create a `.env` file in your project directory and add your credentials:
-
-```env
-AZURE_TENANT_ID=your_azure_tenant_id
-AZURE_CLIENT_ID=your_azure_client_id
-AZURE_CLIENT_SECRET=your_azure_client_secret
-AWS_ACCESS_KEY_ID=your_aws_access_key_id
-AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
-OPENAI_ORG_ID=your_openai_org_id
-OPENAI_API_KEY=your_openai_api_key
-```
-
-### Minimum required permissions
-
-More thorough documentation will follow soon, but for now:
-
-- Azure, the service principal requires `Cost Management Reader` permission for each subscription
-- AWS, the user requires the following actions in a custom policy: `organizations:DescribeAccount`, `organizations:ListAccounts`, `ce:*`
-- OpenAI, nothing specific required
-
-### Getting the cost data
-
-Getting the data depends on the platform. For example, in Azure, you will immediately see all subscriptions that you have access to. In AWS, on the other hand, you either are part of an organization or have a standalone account, etc. OpenAI also has an organizations system, which is currently ignored by the crawler.
-
-There are examples in [example.py](example.py) file.
+There is an open data specification being developed by FinOps Foundation ([FOCUS](https://focus.finops.org/)). At this point, it's still very new and not adopted by the industry. We will keep a close eye on it and support it as soon as feasible.
 
 *Note*: querying long time periods might trigger paginated results. AWS currently handles it correctly, very soon Azure will as well. Have not tested yet with OpenAI.
 
