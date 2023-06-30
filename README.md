@@ -50,4 +50,6 @@ Got ideas for improvements? We'd love your input!
 
 Remember, all contributions from bug fixes to documentation updates are greatly appreciated!
 
+Enjoy :)
+
 Email: finops.fitness.club@gmail.com
