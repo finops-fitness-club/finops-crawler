@@ -32,7 +32,7 @@ Each platform has its own format. Also, the same date range might produce differ
 
 There is an open data specification being developed by FinOps Foundation ([FOCUS](https://focus.finops.org/)). At this point, it's still very new and not adopted by the industry. We will keep a close eye on it and support it as soon as feasible.
 
-*Note*: querying long time periods might trigger paginated results. AWS currently handles it correctly, very soon Azure will as well. Have not tested yet with OpenAI.
+*Note*: querying long time periods might trigger paginated results. AWS and Azure handle it correctly. OpenAI does not have paginated results as it's an undocumented API and it also has not existed yet for a very long time.
 
 ### Plans
 
