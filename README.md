@@ -14,9 +14,9 @@ The result, for now, is a Python variable as returned by the API or SDK.
 
 Each platform is different and has a separate guide on how to set up an entity with minimum permissions to read the cost data. Specific code snippets to get started are included.
 
-- [Azure](./src/finops_crawler/azure)
-- [AWS](./src/finops_crawler/aws)
-- [OpenAI](./src/finops_crawler/openai)
+- [Azure](https://github.com/finops-fitness-club/finops-crawler/tree/main/src/finops_crawler/azure)
+- [AWS](https://github.com/finops-fitness-club/finops-crawler/tree/main/src/finops_crawler/aws)
+- [OpenAI](https://github.com/finops-fitness-club/finops-crawler/tree/main/src/finops_crawler/openai)
 
 
 ### Overview of the flow
