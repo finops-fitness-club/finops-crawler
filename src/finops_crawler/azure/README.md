@@ -8,6 +8,8 @@
 
 Using [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). It creates a service principal and assigns the "Cost Management Reader" role to it in your subscription.
 
+Note: `get_cost_detailed()` needs additional permissions, the specific set to be determined (TODO)
+
 ```bash
 az ad sp create-for-rbac --name "Finops Crawler"
 ```
