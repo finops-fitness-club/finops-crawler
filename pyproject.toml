@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "finops_crawler"
-version = "0.1.13"
+version = "0.1.14"
 description = "It's a package for importing cost and usage data from various cloud platforms and SaaS tools"
 authors = ["Lauri Koobas <laurikoobas@gmail.com>", "FinOps Fitness Club <finops.fitness.club@gmail.com>"]
 readme = "README.md"
@@ -13,6 +13,7 @@ readme = "README.md"
 python = "^3.10"
 requests = "^2.31.0"
 boto3 = "1.26.156"
+PyYAML = "^6.0.1"
 
 [tool.poetry.dev-dependencies]
 python-dotenv = "^1.0.0"
