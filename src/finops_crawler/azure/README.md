@@ -74,13 +74,13 @@ AZURE_CLIENT_SECRET=YOUR_APP_PASSWORD
 
 Copy-paste the following code into a Python file and run it (also found in the [example.py](example.py) file).
 ```python
-import os
 import datetime
+from common import credentials_provider
 from finops_crawler import azure
 
-tenant_id = os.getenv('AZURE_TENANT_ID')
-client_id = os.getenv('AZURE_CLIENT_ID')
-client_secret = os.getenv('AZURE_CLIENT_SECRET')
+credentials = credentials_provider()
+
+tenant_id, client_id, client_secret = credentials.get_credentials('azure')
 azure_costs_client = azure.costs_api(tenant_id, client_id, client_secret)
 
 # Get all subscription ids
@@ -91,11 +91,10 @@ seven_days_ago = today - datetime.timedelta(days=7)
 
 # Fetch cost and usage data for each subscription
 for subscription_id in subscription_ids:
-    print(f"subscription_id: {subscription_id}")
+    print(f"Subscription_id: {subscription_id}")
 
     cost_data = azure_costs_client.get_cost(subscription_id, seven_days_ago, today)
     print(cost_data)
-
 ```
 
 A successful run results in a list of dicts with the fields `UsageDate`, `ResourceId`, `ChargeType`, `Currency`, and `Cost` (I hope - the API is broken for my test account at the moment).
