@@ -37,22 +37,7 @@ class OpenAIAPI(CloudAPI):
 
     def get_cost(self, start_date: Union[str, datetime.datetime], end_date: Union[str, datetime.datetime]):
         """
-        Fetches the daily costs from OpenAI API for a given date range.
-        
-        The date inputs can either be string (formatted as 'YYYY-MM-DD') or datetime objects.
-
-        Args:
-            start_date (Union[str, datetime.datetime]): The start date for the cost data.
-            end_date (Union[str, datetime.datetime]): The end date for the cost data.
-            
-        Returns:
-            List[Dict[str, Any]]: A list of daily costs, with each cost represented as a dictionary that includes the timestamp and date.
-
-        Raises:
-            ValueError: If the API request is not successful.
-
-        Note:
-            The original API response format is enriched with "date" field as a direct transformation from the "timestamp" field. Source: https://community.openai.com/t/how-can-i-check-openai-usage-with-python/117418/10
+        no longer works. Using it outside of a browser session has been disabled by OpenAI
         """
         if isinstance(start_date, str):
             start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')

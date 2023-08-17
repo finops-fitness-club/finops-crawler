@@ -1,1 +1,1 @@
-from .api import OpenAIAPI as costs_api
+from .api import OpenAIAPI as api

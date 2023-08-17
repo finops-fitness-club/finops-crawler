@@ -13,7 +13,7 @@ class CredentialsProvider:
             except yaml.YAMLError as exc:
                 print(exc)
 
-    def get_credentials(self, platform):
+    def get_credentials(self, platform, quiet=False):
         creds = self.config.get(platform)
         if not creds:
             raise ValueError(f"No configuration found for {platform}")
@@ -26,5 +26,18 @@ class CredentialsProvider:
                 continue
             values.append(value)
         if len(errors) > 0:
-            raise ValueError(f"Missing environment variable(s) for the following: {', '.join(errors)}")
-        return tuple(values)
+            if not quiet:
+                raise ValueError(f"Missing environment variable(s) for the following: {', '.join(errors)}")
+            return None
+        else:
+            return tuple(values)
+
+    def get_credential_list(self):
+        available_keys = []
+        for platform in self.config.keys():
+            platform_keys_exist = self.get_credentials(platform, quiet=True)
+            if platform_keys_exist:
+                available_keys.append(platform)
+        return available_keys
+
+        

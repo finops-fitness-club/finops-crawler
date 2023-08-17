@@ -16,6 +16,8 @@ Each platform is different and has a separate guide on how to set up an entity w
 
 - [Azure](https://github.com/finops-fitness-club/finops-crawler/tree/main/src/finops_crawler/azure)
 - [AWS](https://github.com/finops-fitness-club/finops-crawler/tree/main/src/finops_crawler/aws)
+
+No longer works, need to wait for explicit usage API:
 - [OpenAI](https://github.com/finops-fitness-club/finops-crawler/tree/main/src/finops_crawler/openai)
 
 
