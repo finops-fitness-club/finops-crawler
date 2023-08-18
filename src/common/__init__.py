@@ -1,1 +1,0 @@
-from .credentials_provider import CredentialsProvider as credentials_provider

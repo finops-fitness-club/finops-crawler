@@ -1,11 +1,9 @@
 import datetime
-from common import credentials_provider
-from finops_crawler import azure
+from finops_crawler import azure, credentials_provider
 
-credentials = credentials_provider()
+credentials = credentials_provider.api()
 
-tenant_id, client_id, client_secret = credentials.get_credentials('azure')
-azure_costs_client = azure.costs_api(tenant_id, client_id, client_secret)
+azure_costs_client = azure.costs_api(*credentials.get_credentials('azure'))
 
 # Get all subscription ids
 subscription_ids = azure_costs_client.get_all_subscriptions()

@@ -22,21 +22,7 @@ OPENAI_API_KEY=your_api_key
 
 Copy-paste the following code into a Python file and run it (also found in the [example.py](example.py) file).
 ```python
-import datetime
-from common import credentials_provider
-from finops_crawler import openai
-
-credentials = credentials_provider()
-
-org_id, api_key = credentials.get_credentials('openai')
-openai_costs_client = openai.costs_api(org_id, api_key)
-
-today = datetime.datetime.now().date()
-seven_days_ago = today - datetime.timedelta(days=7)
-
-cost_data = openai_costs_client.get_cost(seven_days_ago, today)
-
-print(cost_data)
+# nothing to copy here at the moment, the code doesn't work due to changes in the API
 ```
 
 A successful run results in a list of dicts with the fields `timestamp`, `date` (added by the package), and `line_items` (which is itself a list of dicts with model names and costs).

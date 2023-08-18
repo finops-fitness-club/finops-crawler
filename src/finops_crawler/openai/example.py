@@ -1,14 +1,13 @@
 import datetime
-from common import credentials_provider
-from finops_crawler import openai
+from finops_crawler import openai, credentials_provider
 
-credentials = credentials_provider()
+credentials = credentials_provider.api()
 
-openai_costs_client = openai.costs_api(*credentials.get_credentials('openai'))
+openai_costs_client = openai.api(*credentials.get_credentials('openai'))
 
 today = datetime.datetime.now().date()
 seven_days_ago = today - datetime.timedelta(days=7)
 
-cost_data = openai_costs_client.get_cost(seven_days_ago, today)
+# cost_data = openai_costs_client.get_cost(seven_days_ago, today)
 
-print(cost_data)
+# print(cost_data)
