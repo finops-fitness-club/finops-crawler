@@ -66,7 +66,7 @@ class AWSAPI(CloudAPI):
             for page in paginator.paginate():
                 for account in page['Accounts']:
                     accounts.append(account['Id'])
-                    print(account['Id'])
+                    # print(account['Id'])
         except client.exceptions.AWSOrganizationsNotInUseException as e:
             print("Your account is not a member of an organization.")
             return False

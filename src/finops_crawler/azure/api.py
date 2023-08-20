@@ -34,12 +34,10 @@ class AzureAPI(CloudAPI):
             'scope': 'https://management.azure.com/.default'
         }
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-        print("Start auth")
         response = requests.post(url, headers=headers, data=payload, timeout=10)
         response_json = response.json()
 
         access_token = response_json.get('access_token')
-        print("Auth successful")
 
         self.headers = {'Authorization': f'Bearer {access_token}'}
 
@@ -73,7 +71,6 @@ class AzureAPI(CloudAPI):
 
         start_date_str = start_date.strftime('%Y-%m-%dT%H:%M:%SZ')
         end_date_str = end_date.strftime('%Y-%m-%dT%H:%M:%SZ')
-        print(f"Looking for data between {start_date_str} and {end_date_str}")
 
         # build the body for the request
         body = {
@@ -117,7 +114,6 @@ class AzureAPI(CloudAPI):
             print("Result retrieved successfully, but it contains no data. It might be a very new subscription.")
             raise ValueError("Empty result")
 
-        print(f"Results in this batch: {len(rows)}")
         data += rows
 
         # check if there's a nextLink field in the response
@@ -138,12 +134,12 @@ class AzureAPI(CloudAPI):
                     print("Result retrieved successfully, but it contains no data. It might be a very new subscription.")
                     raise ValueError("Empty result")
 
-                print(f"Results in this batch: {len(rows)}")
+                # print(f"Results in this batch: {len(rows)}")
                 data += rows
 
                 # update the next_link value
                 next_link = result.get('nextLink')
-        print(f"Total rows found: {len(data)}")
+        # print(f"Total rows found: {len(data)}")
 
 
         if len(data) > 0:
@@ -162,7 +158,7 @@ class AzureAPI(CloudAPI):
 
         start_date_str = start_date.strftime('%Y-%m-%d')
         end_date_str = end_date.strftime('%Y-%m-%d')
-        print(f"Looking for detailed cost data between {start_date_str} and {end_date_str}")
+        # print(f"Looking for detailed cost data between {start_date_str} and {end_date_str}")
 
         body = {
             'metric': 'AmortizedCost',
@@ -191,7 +187,7 @@ class AzureAPI(CloudAPI):
             url = response.headers.get('Location')
             if url is None:
                 raise ValueError("Location for polling missing")
-            print(f"Sleeping for {retry_after} seconds before polling again")
+            # print(f"Sleeping for {retry_after} seconds before polling again")
             time.sleep(retry_after)
             response = requests.get(url=url, headers=self.headers)
             try:
@@ -203,20 +199,20 @@ class AzureAPI(CloudAPI):
         result = response.json()
         if result['status'] == 'Completed':
             manifest = result['manifest']
-            print(f"Result contains {manifest['blobCount']} blobs, looping through them")
+            # print(f"Result contains {manifest['blobCount']} blobs, looping through them")
             for i in range(manifest['blobCount']):
-                print(f"Downloading blob: {i}")
+                # print(f"Downloading blob: {i}")
                 blob_response = requests.get(url=manifest['blobs'][i]['blobLink'])
                 csv_file_like_object = io.StringIO(blob_response.text)
                 reader = csv.DictReader(csv_file_like_object)
                 rows = list(reader)
                 data += rows
-                print(f"Found {len(rows)} rows in blob {i}")
+                # print(f"Found {len(rows)} rows in blob {i}")
         else:
             print(f"Result retrieved successfully, but status is {result['status']} instead of Completed")
             raise ValueError("Empty result")
 
-        print(f"Total rows found: {len(data)}")
+        # print(f"Total rows found: {len(data)}")
 
         if len(data) > 0:
             return data
